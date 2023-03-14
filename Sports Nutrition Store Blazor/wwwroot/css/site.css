@@ -211,6 +211,11 @@ a, .btn-link {
     border-radius:35px;
 }
 
+.Products img:hover {
+        transform: scale(1.1);
+        transition: 1s;
+}
+
 .ProteinAndDrink {
     display: inline-block;
 }
@@ -265,6 +270,10 @@ a, .btn-link {
     margin-bottom: 25px;
 }
 
+.btn_MoveToCatalog:hover{
+   filter:brightness(90%);
+}
+
 .Footer {
     background-color: #D86F6F;
 }
@@ -294,7 +303,72 @@ a, .btn-link {
     height:60px;
 }
 
+.Insta:hover {
+    cursor:pointer;
+    transform:scale(1.1);
+}
+
 .VK {
     width: 70px;
     height: 55px;
+}
+
+.VK:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/*--------------------Страница Авторизации--------------------*/
+
+.BodyFormAuth {
+    width: 100%;
+    margin-top:45px;
+}
+
+.HAuth {
+    margin-left:550px;
+}
+
+.AuthForm {
+    width: 40%;
+    background-color: #D86F6F;
+    border-radius: 30px;
+    margin-left: 450px;
+}
+
+.aInSignIn {
+    display: inline-block;
+    margin-left: 120px;
+    margin-top: 25px;
+}
+
+.LogIn {
+    margin-left:180px;
+}
+
+.Password {
+    margin-left: 180px;
+}
+
+.Email {
+    margin-left: 180px;
+}
+.SignIn {
+    margin-left: 195px;
+    background-color: #D86F6F;
+    width: 170px;
+    height: 40px;
+    border-radius: 15px;
+}
+
+.SignIn:hover {
+    filter: brightness(90%);
+}
+
+.ForgotLoginPassword {
+    margin-left: -55px;
+}
+
+.Registr {
+    margin-left:60px;
 }

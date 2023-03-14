@@ -1,0 +1,80 @@
+﻿@page "/auth"
+@inject NavigationManager nav;
+
+<body>
+    <div class="Main">
+        <div class="header">
+            <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
+            <input type="text" class="SearchBar" />
+            <span class="Balance">
+                <span class="BalanceText">
+                    <label>
+                        Баланс:
+                    </label>
+                    <label>
+                        0.0
+                    </label>
+                    <label>RUB</label>
+                </span>
+                <a href="" class="PlusBalance">
+                    <label>Пополнить баланс</label>
+                </a>
+            </span>
+            <div class="Nav">
+                <span class="Catalog">
+                    <span class="CatalogLogo">
+                        <img src="/Images/1564497_basket_cart_food_grosseries_shop_icon.png" class="Basket" />
+                        <label>Каталог</label>
+                    </span>
+                </span>
+                <span class="AboutCompany" @onclick="MoveToAboutCompany">
+                    <span class="AboutCompanyLogo">
+                        <img src="/Images/352432_info_icon.png" class="Basket" />
+                        <label>О компании</label>
+                    </span>
+                </span>
+                <span class="Login">
+                    <span class="LoginLogo">
+                        <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
+                        <label>User</label>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="BodyFormAuth">
+            <h2 class="HAuth">Выполните авторизацию:</h2>
+            <div class="AuthForm">
+                <br /><div class="LogIn">
+                    <h4>Логин:</h4>
+                    <input type="text" />
+                </div><br />
+                <div class="Password">
+                    <h4>Пароль:</h4>
+                    <input type="password" />
+                </div><br />
+                <button class="SignIn">Войти</button><br />
+                <div class="aInSignIn">
+                    <a href="" class="ForgotLoginPassword">Не помните логин или пароль?</a>
+                    <a href="/reg" class="Registr">Регистрация</a>
+                </div>
+            </div><br /><br />
+        </div>
+        <footer class="Footer">
+            <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
+            <div class="SocNetwork">
+                <h5>Наши соц-сети:</h5><br />
+                <div class="Circles">
+                    <img src="/Images/unp6h58xr4fiscbc.png" class="Insta" />
+                    <img src="/Images/22842053.png" class="VK" />
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+@code {
+    private void MoveToAboutCompany()
+    {
+        nav.NavigateTo("/");
+    }
+}

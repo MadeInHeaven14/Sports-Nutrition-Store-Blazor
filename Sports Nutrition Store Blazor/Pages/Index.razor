@@ -32,10 +32,10 @@
                         <label>О компании</label>
                    </span>
                </span>
-               <span class="Login">
+               <span class="Login" @onclick="Login">
                    <span class="LoginLogo">
                         <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
-                        <label>User</label>
+                        <label>@User</label>
                    </span>
                </span>
            </div>
@@ -102,5 +102,18 @@
 
 
 @code{
-    
+    private string? User = "Войти";
+
+    private void Login()
+    {
+        if (User == "Войти")
+        {
+            nav.NavigateTo("/auth");
+        }
+
+        else
+        {
+            
+        }
+    }
 }
