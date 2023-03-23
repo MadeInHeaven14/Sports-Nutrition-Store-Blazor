@@ -1,11 +1,13 @@
 ﻿@page "/reg"
+@using Sports_Nutrition_Store_Blazor.Data;
+@inject UserService service;
 @inject NavigationManager nav;
 
 <body>
     <div class="Main">
         <div class="header">
             <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
-            <input type="text" class="SearchBar" />
+            <input type="search" class="SearchBar" />
             <span class="Balance">
                 <span class="BalanceText">
                     <label>
@@ -33,10 +35,10 @@
                         <label>О компании</label>
                     </span>
                 </span>
-                <span class="Login">
+                <span class="Login" @onclick="Login">
                     <span class="LoginLogo">
                         <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
-                        <label>User</label>
+                        <label>Войти</label>
                     </span>
                 </span>
             </div>
@@ -44,23 +46,31 @@
         <div class="BodyFormAuth">
             <h2 class="HAuth">Выполните регистрацию:</h2>
             <div class="AuthForm">
-                <br /><div class="Email">
-                    <h4>Email:</h4>
-                    <input type="email" />
-                </div><br />
-                <div class="LogIn">
-                    <h4>Логин:</h4>
-                    <input type="text" />
-                </div><br />
-                <div class="Password">
-                    <h4>Пароль:</h4>
-                    <input type="password" />
-                </div><br />
-                <div class="Password">
-                    <h4>Подтвердите пароль:</h4>
-                    <input type="password" />
-                </div><br />
-                <button class="SignIn">Зарегистрироваться</button><br />
+                <EditForm Model="NewUser">
+                    <br /><div class="Email">
+                        <DataAnnotationsValidator />
+                        <h4>Email:</h4>
+                        <InputText type="email" @bind-Value="NewUser.Email"></InputText>
+                        <ValidationMessage For="@(() => NewUser.Email)" />
+                    </div><br />
+                    <div class="LogIn">
+                        <h4>Логин:</h4>
+                        <InputText type="text" @bind-Value="NewUser.Login"></InputText>
+                        <ValidationMessage For="@(() => NewUser.Login)" />
+                    </div><br />
+                    <div class="Password">
+                        <h4>Пароль:</h4>
+                        <InputText type="password" @bind-Value="NewUser.Password"></InputText>
+                        <ValidationMessage For="@(() => NewUser.Password)" />
+                    </div><br />
+                    <div class="Password">
+                        <h4>Подтвердите пароль:</h4>
+                        <InputText type="password" @bind-Value="ConfirmPassword"></InputText>
+                        <label class="UncorrectPassword">@UncorrectPassword</label>
+                        <label class="UncorrectEmail">@UncorrectEmail</label>
+                    </div><br />
+                </EditForm>
+                <button class="SignIn" @onclick="AddUser">Зарегистрироваться</button><br />
             </div><br /><br />
         </div>
         <footer class="Footer">
@@ -77,8 +87,48 @@
 </body>
 
 @code {
+    private User NewUser = new User();
+    private string? ConfirmPassword;
+    private string? UncorrectPassword;
+    private string? UncorrectEmail;
+
     private void MoveToAboutCompany()
     {
         nav.NavigateTo("/");
+    }
+
+    private void Login()
+    {
+        nav.NavigateTo("/auth");
+    }
+
+    private void AddUser()
+    {
+        if (NewUser.Email != null && NewUser.Login != null && NewUser.Password != null)
+        {
+            if (MongoDB.FindWithEmail(NewUser.Email) == null)
+            {
+                if (NewUser.Password == ConfirmPassword)
+                {
+                    NewUser.Role = "Клиент";
+                    NewUser.Balance = 5000;
+                    MongoDB.AddToDB(NewUser);
+                    service.SignIn(NewUser);
+                    nav.NavigateTo("/Pro");
+                }
+
+                else
+                {
+                    UncorrectPassword = "Пароли не совпадают";
+                    UncorrectEmail = string.Empty;
+                }
+            }
+
+            else
+            {
+                UncorrectEmail = "Пользователь с такой почтой уже существует";
+                UncorrectPassword = string.Empty;
+            }
+        }
     }
 }

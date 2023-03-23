@@ -1,10 +1,12 @@
 ﻿@inject NavigationManager nav;
+@inject Sports_Nutrition_Store_Blazor.Data.UserService service;
 @page "/"
+@using Sports_Nutrition_Store_Blazor.Data;
 <body>
     <div class="Main">
         <div class="header">
            <img src="/Images/Лого-transformed-transformed.png"  class="Logo1"/>
-           <input type="text" class="SearchBar" />
+           <input type="search" class="SearchBar" />
            <span class="Balance">
                <span class="BalanceText">
                    <label>
@@ -113,7 +115,15 @@
 
         else
         {
-            
+            nav.NavigateTo("/Pro");
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (service.Login != string.Empty)
+        {
+            User = service.Login;
         }
     }
 }

@@ -81,7 +81,7 @@ a, .btn-link {
     width: 250px;
     height: 50px;
     background-color: white;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     margin-left: 95px;
     margin-top:55px;
 }
@@ -169,13 +169,14 @@ a, .btn-link {
 
 .Plus {
     width: 100%;
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 .PlusGroup {
     width: 100%;
     background-color: #D86F6F;
-    display:inline-block;
+    display: inline-block;
+    border-radius: 20px;
 }
 
 .PlusGroup img {
@@ -212,8 +213,8 @@ a, .btn-link {
 }
 
 .Products img:hover {
-        transform: scale(1.1);
-        transition: 1s;
+    transform: scale(1.05);
+    transition: 1s;
 }
 
 .ProteinAndDrink {
@@ -371,4 +372,36 @@ a, .btn-link {
 
 .Registr {
     margin-left:60px;
+}
+
+.Danger {
+    color: red;
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.UncorrectPassword {
+    color: red;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.UncorrectEmail {
+    color: red;
+    margin-left: -45px;
+    font-size: 16px;
+}
+
+
+/*--------------------Личный кабинет--------------------*/
+.btn_Redact {
+    background-color: #D86F6F;
+    width: 150px;
+    height: 50px;
+    border-radius: 30px;
+    margin-left:50px;
+}
+
+.btn_Redact:hover {
+    filter: brightness(90%);
 }

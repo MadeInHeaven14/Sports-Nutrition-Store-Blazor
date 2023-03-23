@@ -1,7 +1,8 @@
-﻿@page "/auth"
-@inject NavigationManager nav;
+﻿@page "/Pro"
+@using MongoDB.Driver;
 @using Sports_Nutrition_Store_Blazor.Data;
 @inject UserService service;
+@inject NavigationManager nav;
 
 <body>
     <div class="Main">
@@ -38,30 +39,34 @@
                 <span class="Login">
                     <span class="LoginLogo">
                         <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
-                        <label>Войти</label>
+                        <label>@User</label>
                     </span>
                 </span>
             </div>
         </div>
-        <div class="BodyFormAuth">
-            <h2 class="HAuth">Выполните авторизацию:</h2>
-            <div class="AuthForm">
-                <label class="Danger">@DangerMessage</label>
-                <br /><div class="LogIn">
-                    <h4>Почта:</h4>
-                    <input type="text" @bind-value="Email" />
-                </div><br />
-                <div class="Password">
-                    <h4>Пароль:</h4>
-                    <input type="password" @bind-value="Password"/>
-                </div><br />
-                <button class="SignIn" @onclick="SignIn">Войти</button><br />
-                <div class="aInSignIn">
-                    <a href="" class="ForgotLoginPassword">Не помните логин или пароль?</a>
-                    <a href="/reg" class="Registr">Регистрация</a>
-                </div>
-            </div><br /><br />
-        </div>
+        <div class="Body">
+            <div class="Profile">
+                <EditForm Model="RedactUser">
+                    <h2>Личный кабинет пользователя @service.Login</h2><br />
+                    <div class="ProfileEmail">
+                        <label>Email:</label>
+                        <InputText type="email" @bind-Value="RedactUser.Email"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.Email)" />
+                    </div><br />
+                    <div class="ProfileLogin">
+                        <label>Логин:</label>
+                        <InputText type="text" @bind-Value="RedactUser.Login"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.Login)" />
+                    </div><br />
+                    <div class="ProfilePassword">
+                        <label>Пароль:</label>
+                        <InputText type="password" @bind-Value="RedactUser.Password"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.Password)" />
+                    </div>
+                </EditForm><br />
+                <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+            </div>
+        </div><br />
         <footer class="Footer">
             <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
             <div class="SocNetwork">
@@ -76,37 +81,29 @@
 </body>
 
 @code {
-    private string Email;
-    private string Password;
-    private string DangerMessage;
-
-    private void SignIn()
+    private User RedactUser = new User();
+    private string User = string.Empty;
+    protected override async Task OnInitializedAsync()
     {
-        if (Email != string.Empty && Password != string.Empty)
-        {
-            var user = MongoDB.FindWithEmail(Email);
-            if (user != null)
-            {
-                if (Password == user.Password)
-                {
-                    service.SignIn(user);
-                    nav.NavigateTo("/Pro");
-                }
-
-                else
-                {
-                    DangerMessage = "Неправильно введена почта или пароль";
-                }
-            }
-
-            else
-            {
-                DangerMessage = "Неправильно введена почта или пароль";
-            }
-        }
+        User = service.Login;
+        RedactUser.Email = service.Email;
+        RedactUser.Login = service.Login;
+        RedactUser.Password = service.Password;
+        RedactUser.Role = service.Role;
+        RedactUser.Balance = service.Balance;
+        RedactUser.Basket = service.Basket;
+        RedactUser.Purchases = service.Purchases;
     }
+
     private void MoveToAboutCompany()
     {
         nav.NavigateTo("/");
+    }
+
+    private void Update()
+    {
+        MongoDB.ReplaceByEmail(RedactUser, RedactUser.Email);
+        service.SignIn(RedactUser);
+        User = RedactUser.Login;
     }
 }

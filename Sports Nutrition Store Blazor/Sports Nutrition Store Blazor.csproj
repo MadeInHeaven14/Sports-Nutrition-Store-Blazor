@@ -7,4 +7,10 @@
     <RootNamespace>Sports_Nutrition_Store_Blazor</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.19.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
+    <PackageReference Include="MongoDB.Driver.GridFS" Version="2.19.0" />
+  </ItemGroup>
+
 </Project>
