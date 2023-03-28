@@ -90,7 +90,15 @@
                 if (Password == user.Password)
                 {
                     service.SignIn(user);
-                    nav.NavigateTo("/Pro");
+                    if (user.Role == "Клиент")
+                    {
+                        nav.NavigateTo("/ProCli");
+                    } 
+
+                    else if (user.Role == "Админ")
+                    {
+                        nav.NavigateTo("/ProAdm");
+                    }
                 }
 
                 else

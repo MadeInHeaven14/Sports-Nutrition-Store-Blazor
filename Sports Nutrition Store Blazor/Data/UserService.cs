@@ -21,5 +21,17 @@
             Purchases = user.Purchases;
             return;
         }
+
+        public void LogOut()
+        {
+            Login = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
+            Basket = new List<Product>();
+            Role = string.Empty;
+            Balance = 0;
+            Purchases = new List<Product>();
+            return;
+        }
     }
 }

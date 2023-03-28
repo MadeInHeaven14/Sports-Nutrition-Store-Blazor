@@ -19,10 +19,11 @@ namespace Sports_Nutrition_Store_Blazor.Data
         //[StringLength(15, MinimumLength = 6, ErrorMessage = "Введите корректный пароль")]
         public string Password { get; set; }
         public string Role { get; set; }
+        [BsonIgnoreIfNull]
         public float Balance { get; set; }
-        //[BsonIgnoreIfNull]
+        [BsonIgnoreIfNull]
         public List<Product> Basket { get; set; }
-        //[BsonIgnoreIfNull]
+        [BsonIgnoreIfNull]
         public List<Product> Purchases { get; set; }
     }
 }

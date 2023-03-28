@@ -112,6 +112,8 @@
                 {
                     NewUser.Role = "Клиент";
                     NewUser.Balance = 5000;
+                    NewUser.Basket = new List<Product>();
+                    NewUser.Purchases = new List<Product>();
                     MongoDB.AddToDB(NewUser);
                     service.SignIn(NewUser);
                     nav.NavigateTo("/Pro");

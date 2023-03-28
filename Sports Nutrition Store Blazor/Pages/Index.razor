@@ -95,8 +95,8 @@
         <div class="SocNetwork">
             <h5>Наши соц-сети:</h5><br />
             <div class="Circles">
-                <img src="/Images/unp6h58xr4fiscbc.png" class="Insta"/>
-                <img src="/Images/22842053.png" class="VK"/>
+                <img src="/Images/unp6h58xr4fiscbc.png" class="Insta" />
+                <a href="https://vk.com/po1son69"><img src="/Images/22842053.png" class="VK" /></a>
             </div>
         </div>
     </footer>
@@ -115,7 +115,15 @@
 
         else
         {
-            nav.NavigateTo("/Pro");
+            if (service.Role == "Клиент")
+            {
+                nav.NavigateTo("/Pro");
+            }
+           
+            else if (service.Role == "Админ")
+            {
+                nav.NavigateTo("/ProAdm");
+            }
         }
     }
 

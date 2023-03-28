@@ -1,0 +1,119 @@
+﻿@page "/ProCli"
+@using MongoDB.Driver;
+@using Sports_Nutrition_Store_Blazor.Data;
+@inject UserService service;
+@inject NavigationManager nav;
+
+<body>
+    <div class="Main">
+        <div class="header">
+            <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
+            <input type="search" class="SearchBar" />
+            <span class="Balance">
+                <span class="BalanceText">
+                    <label>
+                        Баланс:
+                    </label>
+                    <label>
+                        0.0
+                    </label>
+                    <label>RUB</label>
+                </span>
+                <a href="" class="PlusBalance">
+                    <label>Пополнить баланс</label>
+                </a>
+            </span>
+            <div class="Nav">
+                <span class="Catalog">
+                    <span class="CatalogLogo">
+                        <img src="/Images/1564497_basket_cart_food_grosseries_shop_icon.png" class="Basket" />
+                        <label>Каталог</label>
+                    </span>
+                </span>
+                <span class="AboutCompany" @onclick="MoveToAboutCompany">
+                    <span class="AboutCompanyLogo">
+                        <img src="/Images/352432_info_icon.png" class="Basket" />
+                        <label>О компании</label>
+                    </span>
+                </span>
+                <span class="Login">
+                    <span class="LoginLogo">
+                        <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
+                        <label>@User</label>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="Body">
+            <div class="Profile">
+                <EditForm Model="RedactUser">
+                    <DataAnnotationsValidator />
+                    <h2>Личный кабинет пользователя @service.Login</h2><br />
+                    <div class="ProfileEmail">
+                        <label>Email:</label>
+                        <InputText type="email" @bind-Value="RedactUser.Email"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.Email)" />
+                    </div><br />
+                    <div class="ProfileLogin">
+                        <label>Логин:</label>
+                        <InputText type="text" @bind-Value="RedactUser.Login"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.Login)" />
+                    </div><br />
+                    <div class="ProfilePassword">
+                        <label>Пароль:</label>
+                        <InputText type="password" @bind-Value="RedactUser.Password"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.Password)" />
+                    </div><br />
+                    <div class="ProfileBalance">
+                        <label>Баланс:</label>
+                        <InputNumber @bind-Value="RedactUser.Balance" disabled></InputNumber>
+                        <a href="">Пополнить</a>
+                    </div>
+                </EditForm><br />
+                <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+            </div>
+        </div><br />
+        <footer class="Footer">
+            <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
+            <div class="SocNetwork">
+                <h5>Наши соц-сети:</h5><br />
+                <div class="Circles">
+                    <img src="/Images/unp6h58xr4fiscbc.png" class="Insta" />
+                    <img src="/Images/22842053.png" class="VK" />
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+@code {
+    private User RedactUser = new User();
+    private string User = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        User = service.Login;
+        RedactUser.Email = service.Email;
+        RedactUser.Login = service.Login;
+        RedactUser.Password = service.Password;
+        RedactUser.Role = service.Role;
+        RedactUser.Balance = service.Balance;
+        RedactUser.Basket = service.Basket;
+        RedactUser.Purchases = service.Purchases;
+    }
+
+    private void MoveToAboutCompany()
+    {
+        nav.NavigateTo("/");
+    }
+
+    private void Update()
+    {
+        if (RedactUser.Email != string.Empty && RedactUser.Login != string.Empty && RedactUser.Password != string.Empty)
+        {
+            MongoDB.ReplaceByEmail(RedactUser, RedactUser.Email);
+            service.SignIn(RedactUser);
+            User = RedactUser.Login;
+        }
+        
+    }
+}

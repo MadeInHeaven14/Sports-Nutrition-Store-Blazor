@@ -1,4 +1,4 @@
-﻿@page "/Pro"
+﻿@page "/ProAdm"
 @using MongoDB.Driver;
 @using Sports_Nutrition_Store_Blazor.Data;
 @inject UserService service;
@@ -12,18 +12,18 @@
             <span class="Balance">
                 <span class="BalanceText">
                     <label>
-                        Баланс:
+                        
                     </label>
                     <label>
-                        0.0
+                        
                     </label>
-                    <label>RUB</label>
+                    <label></label>
                 </span>
                 <a href="" class="PlusBalance">
-                    <label>Пополнить баланс</label>
+                    <label></label>
                 </a>
             </span>
-            <div class="Nav">
+            <div class="Nav" style="margin-left:217px">
                 <span class="Catalog">
                     <span class="CatalogLogo">
                         <img src="/Images/1564497_basket_cart_food_grosseries_shop_icon.png" class="Basket" />
@@ -47,6 +47,7 @@
         <div class="Body">
             <div class="Profile">
                 <EditForm Model="RedactUser">
+                    <DataAnnotationsValidator />
                     <h2>Личный кабинет пользователя @service.Login</h2><br />
                     <div class="ProfileEmail">
                         <label>Email:</label>
@@ -62,7 +63,7 @@
                         <label>Пароль:</label>
                         <InputText type="password" @bind-Value="RedactUser.Password"></InputText>
                         <ValidationMessage For="@(() => RedactUser.Password)" />
-                    </div>
+                    </div><br />
                 </EditForm><br />
                 <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
             </div>
@@ -102,8 +103,12 @@
 
     private void Update()
     {
-        MongoDB.ReplaceByEmail(RedactUser, RedactUser.Email);
-        service.SignIn(RedactUser);
-        User = RedactUser.Login;
+        if (RedactUser.Email != string.Empty && RedactUser.Login != string.Empty && RedactUser.Password != string.Empty)
+        {
+            MongoDB.ReplaceByEmail(RedactUser, RedactUser.Email);
+            service.SignIn(RedactUser);
+            User = RedactUser.Login;
+        }
+
     }
 }
