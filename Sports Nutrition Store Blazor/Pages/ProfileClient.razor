@@ -70,7 +70,10 @@
                         <a href="">Пополнить</a>
                     </div>
                 </EditForm><br />
-                <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+                <div class="ProfileButtons">
+                    <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+                </div><br />
+                <button class="btn_Exit" @onclick="Exit"><h5>Выйти</h5></button>
             </div>
         </div><br />
         <footer class="Footer">
@@ -114,6 +117,11 @@
             service.SignIn(RedactUser);
             User = RedactUser.Login;
         }
-        
+    }
+
+    private void Exit()
+    {
+        nav.NavigateTo("/");
+        service.LogOut();
     }
 }

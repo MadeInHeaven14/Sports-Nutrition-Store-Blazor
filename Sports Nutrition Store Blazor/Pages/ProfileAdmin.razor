@@ -64,8 +64,21 @@
                         <InputText type="password" @bind-Value="RedactUser.Password"></InputText>
                         <ValidationMessage For="@(() => RedactUser.Password)" />
                     </div><br />
+                    <div class="ProfileFIO">
+                        <label>ФИО:</label>
+                        <InputText type="text" @bind-Value="RedactUser.FIO" style="width: 250px"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.FIO)" />
+                    </div><br />
+                    <div class="ProfilePlaceOfWork">
+                        <label>Место работы:</label>
+                        <InputText type="text" @bind-Value="RedactUser.PlaceOfWork" style="width: 350px"></InputText>
+                        <ValidationMessage For="@(() => RedactUser.PlaceOfWork)" />
+                    </div><br />
                 </EditForm><br />
-                <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+                <div class="ProfileButtons">
+                    <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+                </div><br />
+                <button class="btn_Exit" @onclick="Exit"><h5>Выйти</h5></button>
             </div>
         </div><br />
         <footer class="Footer">
@@ -94,6 +107,8 @@
         RedactUser.Balance = service.Balance;
         RedactUser.Basket = service.Basket;
         RedactUser.Purchases = service.Purchases;
+        RedactUser.FIO = service.FIO;
+        RedactUser.PlaceOfWork = service.PlaceOfWork;
     }
 
     private void MoveToAboutCompany()
@@ -103,12 +118,18 @@
 
     private void Update()
     {
-        if (RedactUser.Email != string.Empty && RedactUser.Login != string.Empty && RedactUser.Password != string.Empty)
+        if (RedactUser.Email != string.Empty && RedactUser.Login != string.Empty && RedactUser.Password != string.Empty && RedactUser.FIO != string.Empty && RedactUser.PlaceOfWork != string.Empty)
         {
             MongoDB.ReplaceByEmail(RedactUser, RedactUser.Email);
             service.SignIn(RedactUser);
             User = RedactUser.Login;
         }
 
+    }
+
+    private void Exit()
+    {
+        nav.NavigateTo("/");
+        service.LogOut();
     }
 }

@@ -22,8 +22,12 @@ namespace Sports_Nutrition_Store_Blazor.Data
         [BsonIgnoreIfNull]
         public float Balance { get; set; }
         [BsonIgnoreIfNull]
-        public List<Product> Basket { get; set; }
+        public List<Product>? Basket { get; set; }
         [BsonIgnoreIfNull]
-        public List<Product> Purchases { get; set; }
+        public List<Product>? Purchases { get; set; }
+        [BsonIgnoreIfNull]
+        public string? FIO { get; set; }
+        [BsonIgnoreIfNull]
+        public string? PlaceOfWork { get; set; }
     }
 }
