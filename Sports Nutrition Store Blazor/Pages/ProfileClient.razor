@@ -15,7 +15,7 @@
                         Баланс:
                     </label>
                     <label>
-                        0.0
+                        @Balance
                     </label>
                     <label>RUB</label>
                 </span>
@@ -92,6 +92,7 @@
 @code {
     private User RedactUser = new User();
     private string User = string.Empty;
+    private string? Balance = "0.0";
     protected override async Task OnInitializedAsync()
     {
         User = service.Login;
@@ -102,6 +103,7 @@
         RedactUser.Balance = service.Balance;
         RedactUser.Basket = service.Basket;
         RedactUser.Purchases = service.Purchases;
+        Balance = RedactUser.Balance.ToString();
     }
 
     private void MoveToAboutCompany()
