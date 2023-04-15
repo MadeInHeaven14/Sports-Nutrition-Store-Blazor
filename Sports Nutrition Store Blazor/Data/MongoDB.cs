@@ -8,8 +8,8 @@ namespace Sports_Nutrition_Store_Blazor.Data
     {
         public static void AddToDB(User NewUser)
         {
-            var un1t = new MongoClient();
-            var database = un1t.GetDatabase("SportNutritionUsers");
+            var unit = new MongoClient();
+            var database = unit.GetDatabase("SportNutritionUsers");
             var collection = database.GetCollection<User>("Users");
             collection.InsertOne(NewUser);
         }

@@ -82,14 +82,14 @@ a, .btn-link {
     height: 50px;
     background-color: white;
     /*border: 1px solid black;*/
-    margin-left: 95px;
+    margin-left: 45px;
     margin-top:55px;
 }
 
 .Balance{
     height:70px;
     margin-top: 60px;
-    margin-left: 95px;
+    margin-left: 145px;
 }
 
 .PlusBalance{
@@ -102,7 +102,7 @@ a, .btn-link {
     width: 50%;
     height: 150px;
     display: flex;
-    
+    margin-left: 200px;
     
 }
 
@@ -114,14 +114,13 @@ a, .btn-link {
 }
 
 .Catalog:hover{
-    cursor:pointer;
     filter:brightness(70%);
 }
 
 .CatalogLogo {
     position:relative;
     top:45px;
-    left:20px;
+    left:15px;
 }
 
 .AboutCompany {
@@ -140,7 +139,7 @@ a, .btn-link {
 .AboutCompanyLogo {
     position: relative;
     top: 45px;
-    left: 10px;
+    left: -3px;
 }
 
 .Login {
@@ -159,7 +158,26 @@ a, .btn-link {
 .LoginLogo {
     position: relative;
     top: 45px;
-    left: 35px;
+    left: 15px;
+}
+
+.UserBasket {
+    border: 1px solid black;
+    height: 150px;
+    width: 215px;
+    background-color: #D86F6F;
+    margin-left: 20px;
+}
+
+.UserBasket:hover {
+    cursor: pointer;
+    filter: brightness(70%);
+}
+
+.UserBasketLogo {
+    position: relative;
+    top: 45px;
+    left: 10px;
 }
 
 .Basket {

@@ -8,7 +8,7 @@
     <div class="Main">
         <div class="header">
             <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
-            <input type="search" class="SearchBar" />
+            @*<input type="search" class="SearchBar" />*@
             <span class="Balance">
                 <span class="BalanceText">
                     <label>
@@ -18,11 +18,15 @@
                         @Balance
                     </label>
                     <label>RUB</label>
-                </span>
+                </span><br />
                 <a href="" class="PlusBalance">
                     <label>Пополнить баланс</label>
                 </a>
             </span>
+            @*<span class="UserBasket" hidden="@false">
+            <label>Корзина:</label>
+            <label>0</label>
+            </span>*@
             <div class="Nav">
                 <span class="Catalog">
                     <span class="CatalogLogo">
@@ -40,6 +44,12 @@
                     <span class="LoginLogo">
                         <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
                         <label>@User</label>
+                    </span>
+                </span>
+                <span class="UserBasket">
+                    <span class="UserBasketLogo">
+                        <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
+                        <label>Корзина: @RedactUser.Basket.Count</label>
                     </span>
                 </span>
             </div>

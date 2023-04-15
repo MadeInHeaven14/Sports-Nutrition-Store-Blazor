@@ -7,21 +7,25 @@
     <div class="Main">
         <div class="header">
             <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
-            <input type="search" class="SearchBar" />
+            @*<input type="search" class="SearchBar" />*@
             <span class="Balance">
                 <span class="BalanceText">
                     <label>
                         Баланс:
                     </label>
                     <label>
-                        0.0
+                        0
                     </label>
                     <label>RUB</label>
-                </span>
-                <a href="" class="PlusBalance">
+                </span><br />
+                <a href="" class="PlusBalance" @onclick="BalanceOrLogin">
                     <label>Пополнить баланс</label>
                 </a>
             </span>
+            @*<span class="UserBasket" hidden="@false">
+            <label>Корзина:</label>
+            <label>0</label>
+            </span>*@
             <div class="Nav">
                 <span class="Catalog">
                     <span class="CatalogLogo">
@@ -39,6 +43,12 @@
                     <span class="LoginLogo">
                         <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
                         <label>Войти</label>
+                    </span>
+                </span>
+                <span class="UserBasket">
+                    <span class="UserBasketLogo">
+                        <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
+                        <label>Корзина: 0</label>
                     </span>
                 </span>
             </div>
@@ -132,5 +142,10 @@
                 UncorrectPassword = string.Empty;
             }
         }
+    }
+
+    private void BalanceOrLogin()
+    {
+        nav.NavigateTo("/auth");
     }
 }
