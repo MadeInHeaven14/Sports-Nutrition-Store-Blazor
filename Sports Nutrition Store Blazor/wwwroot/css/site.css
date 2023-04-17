@@ -357,7 +357,7 @@ a, .btn-link {
 
 .aInSignIn {
     display: inline-block;
-    margin-left: 120px;
+    margin-left: 170px;
     margin-top: 25px;
 }
 
@@ -437,5 +437,20 @@ a, .btn-link {
 }
 
 .btn_Exit:hover {
+    filter: brightness(90%);
+}
+
+
+/*--------------------Страница восстановления пароля--------------------*/
+
+.btn_RecoveryPassword {
+    margin-left: 195px;
+    background-color: #D86F6F;
+    width: 170px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.btn_RecoveryPassword:hover {
     filter: brightness(90%);
 }

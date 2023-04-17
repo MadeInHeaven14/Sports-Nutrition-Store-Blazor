@@ -115,7 +115,7 @@
 
 @code{
     private string? User = "Войти";
-    private string? Balance = "0.0";
+    private float Balance = 0;
     private int BasketProductCount = 0;
     private bool isBalanceHidden = false;
 
@@ -145,7 +145,7 @@
         if (service.Login != string.Empty)
         {
             User = service.Login;
-            Balance = service.Balance.ToString();
+            Balance = service.Balance;
             BasketProductCount = service.Basket.Count;
             if (service.Role == "Админ")
             {

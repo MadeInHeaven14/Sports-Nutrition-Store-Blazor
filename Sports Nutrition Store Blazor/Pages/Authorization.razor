@@ -67,7 +67,7 @@
                 </div><br />
                 <button class="SignIn" @onclick="SignIn">Войти</button><br />
                 <div class="aInSignIn">
-                    <a href="" class="ForgotLoginPassword">Не помните логин или пароль?</a>
+                    <a href="/recovery" class="ForgotLoginPassword">Не помните пароль?</a>
                     <a href="/reg" class="Registr">Регистрация</a>
                 </div>
             </div><br /><br />
@@ -99,6 +99,7 @@
             {
                 if (Password == user.Password)
                 {
+                    service.isAuth = true;
                     service.SignIn(user);
                     if (user.Role == "Клиент")
                     {
