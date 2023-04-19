@@ -440,6 +440,17 @@ a, .btn-link {
     filter: brightness(90%);
 }
 
+.btn_Add {
+    background-color: #D86F6F;
+    width: 150px;
+    height: 60px;
+    border-radius: 30px;
+    margin-left: 90px;
+}
+
+.btn_Add:hover {
+    filter: brightness(90%);
+}
 
 /*--------------------Страница восстановления пароля--------------------*/
 
@@ -454,3 +465,31 @@ a, .btn-link {
 .btn_RecoveryPassword:hover {
     filter: brightness(90%);
 }
+
+/*--------------------Страница добавления товара--------------------*/
+
+.ProductName {
+    margin-left: 180px;
+}
+
+.ProductPrice {
+    margin-left: 180px;
+}
+
+
+.ProductImg {
+    margin-left: 180px;
+}
+
+.btn_ProductAdd {
+    margin-left: 195px;
+    background-color: #D86F6F;
+    width: 170px;
+    height: 40px;
+    border-radius: 15px;
+}
+
+.btn_ProductAdd:hover {
+    filter: brightness(90%);
+}
+

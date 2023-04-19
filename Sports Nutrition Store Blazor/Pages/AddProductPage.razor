@@ -1,4 +1,4 @@
-﻿@page "/auth"
+﻿@page "/AddProduct"
 @inject NavigationManager nav;
 @using Sports_Nutrition_Store_Blazor.Data;
 @inject UserService service;
@@ -8,7 +8,7 @@
         <div class="header">
             <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
             @*<input type="search" class="SearchBar" />*@
-            <span class="Balance">
+            <span class="Balance" hidden="@true">
                 <span class="BalanceText">
                     <label>
                         Баланс:
@@ -18,7 +18,7 @@
                     </label>
                     <label>RUB</label>
                 </span><br />
-                <a href="" class="PlusBalance" @onclick="BalanceOrLogin">
+                <a href="" class="PlusBalance">
                     <label>Пополнить баланс</label>
                 </a>
             </span>
@@ -39,10 +39,10 @@
                         <label>О компании</label>
                     </span>
                 </span>
-                <span class="Login" @onclick="BalanceOrLogin">
+                <span class="Login" @onclick="Login">
                     <span class="LoginLogo">
                         <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
-                        <label>Войти</label>
+                        <label>@User</label>
                     </span>
                 </span>
                 <span class="UserBasket">
@@ -53,25 +53,36 @@
                 </span>
             </div>
         </div>
-        <div class="BodyFormAuth">
-            <h2 class="HAuth">Выполните авторизацию:</h2>
+        <div class="Body">
+            <h2 class="HAuth">Добавление товара:</h2>
             <div class="AuthForm">
-                <label class="Danger">@DangerMessage</label>
-                <br /><div class="LogIn">
-                    <h4>Email:</h4>
-                    <input type="text" @bind-value="Email" />
-                </div><br />
-                <div class="Password">
-                    <h4>Пароль:</h4>
-                    <input type="password" @bind-value="Password"/>
-                </div><br />
-                <button class="SignIn" @onclick="SignIn">Войти</button><br />
-                <div class="aInSignIn">
-                    <a href="/recovery" class="ForgotLoginPassword">Не помните пароль?</a>
-                    <a href="/reg" class="Registr">Регистрация</a>
-                </div>
+                @*<br /><div class="LogIn">
+                <h4>Введите почту:</h4>
+                <input type="text" @bind-value="RecoveryUser.Email" />
+                </div><br />*@
+                <EditForm Model="NewProduct">
+                    <br /><div class="ProductName">
+                        <DataAnnotationsValidator />
+                        <h4>Название товара:</h4>
+                        <InputText type="text" @bind-Value="NewProduct.Name"></InputText>
+                        <ValidationMessage For="@(() => NewProduct.Name)" />
+                    </div><br />
+                    <div class="ProductPrice">
+                        <h4>Цена товара:</h4>
+                        <InputNumber @bind-Value="NewProduct.Price"></InputNumber>
+                        <ValidationMessage For="@(() => NewProduct.Price)" />
+                    </div><br />
+                    <div class="ProductImg">
+                        <h4>Фото товара:</h4>
+                        <InputFile type="text" @bind-Value="NewProduct.Img"></InputFile>
+                        <ValidationMessage For="@(() => NewProduct.Name)" />
+                    </div><br />
+                </EditForm>
+                <button class="btn_ProductAdd" @onclick="AddProduct">Добавить товар</button><br />
+                @*<label class="Danger">@DangerMessage</label>
+                <button class="btn_RecoveryPassword" @onclick="Recovery">Восстановить пароль</button><br />*@
             </div><br /><br />
-        </div>
+        </div><br />
         <footer class="Footer">
             <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
             <div class="SocNetwork">
@@ -84,53 +95,43 @@
         </footer>
     </div>
 </body>
-
 @code {
-    private string Email;
-    private string Password;
-    private string DangerMessage;
+    private string? User = "Войти";
+    private Product NewProduct = new Product();
 
-    private void SignIn()
+    protected override async Task OnInitializedAsync()
     {
-        if (Email != string.Empty && Password != string.Empty)
-        {
-            var user = MongoDB.FindWithEmail(Email);
-            if (user != null)
-            {
-                if (Password == user.Password)
-                {
-                    service.isAuth = true;
-                    service.SignIn(user);
-                    if (user.Role == "Клиент")
-                    {
-                        nav.NavigateTo("/ProCli");
-                    } 
-
-                    else if (user.Role == "Админ")
-                    {
-                        nav.NavigateTo("/ProAdm");
-                    }
-                }
-
-                else
-                {
-                    DangerMessage = "Неправильно введена почта или пароль";
-                }
-            }
-
-            else
-            {
-                DangerMessage = "Неправильно введена почта или пароль";
-            }
-        }
+        User = service.Login;
     }
+
     private void MoveToAboutCompany()
     {
         nav.NavigateTo("/");
     }
 
-    private void BalanceOrLogin()
+    private void Login()
     {
-        nav.NavigateTo("/auth");
+        if (User == "Войти")
+        {
+            nav.NavigateTo("/auth");
+        }
+
+        else
+        {
+            if (service.Role == "Клиент")
+            {
+                nav.NavigateTo("/ProCli");
+            }
+
+            else if (service.Role == "Админ")
+            {
+                nav.NavigateTo("/ProAdm");
+            }
+        }
+    }
+
+    private void AddProduct()
+    {
+        MongoDB.AddProductToDB(NewProduct);
     }
 }

@@ -61,6 +61,7 @@
                         <DataAnnotationsValidator />
                         <h4>Email:</h4>
                         <InputText type="email" @bind-Value="NewUser.Email"></InputText>
+                        <label class="UncorrectEmail">@UncorrectEmail</label>
                         <ValidationMessage For="@(() => NewUser.Email)" />
                     </div><br />
                     <div class="LogIn">
@@ -77,7 +78,6 @@
                         <h4>Подтвердите пароль:</h4>
                         <InputText type="password" @bind-Value="ConfirmPassword"></InputText>
                         <label class="UncorrectPassword">@UncorrectPassword</label>
-                        <label class="UncorrectEmail">@UncorrectEmail</label>
                     </div><br />
                 </EditForm>
                 <button class="SignIn" @onclick="AddUser">Зарегистрироваться</button><br />
@@ -124,10 +124,10 @@
                     NewUser.Balance = 5000;
                     NewUser.Basket = new List<Product>();
                     NewUser.Purchases = new List<Product>();
-                    MongoDB.AddToDB(NewUser);
+                    MongoDB.AddUserToDB(NewUser);
                     service.isAuth = true;
                     service.SignIn(NewUser);
-                    nav.NavigateTo("/Pro");
+                    nav.NavigateTo("/ProCli");
                 }
 
                 else

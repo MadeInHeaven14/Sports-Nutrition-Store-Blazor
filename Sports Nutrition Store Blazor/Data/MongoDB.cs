@@ -6,12 +6,20 @@ namespace Sports_Nutrition_Store_Blazor.Data
 {
     public class MongoDB
     {
-        public static void AddToDB(User NewUser)
+        public static void AddUserToDB(User NewUser)
         {
             var unit = new MongoClient();
             var database = unit.GetDatabase("SportNutritionUsers");
             var collection = database.GetCollection<User>("Users");
             collection.InsertOne(NewUser);
+        }
+
+        public static void AddProductToDB(Product NewProduct)
+        {
+            var unit = new MongoClient();
+            var database = unit.GetDatabase("SportNutritionUsers");
+            var collection = database.GetCollection<Product>("Products");
+            collection.InsertOne(NewProduct);
         }
 
         public static User FindWithEmail (string Email)

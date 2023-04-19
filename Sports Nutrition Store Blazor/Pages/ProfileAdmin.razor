@@ -84,9 +84,10 @@
                         <InputText type="text" @bind-Value="RedactUser.PlaceOfWork" style="width: 350px"></InputText>
                         <ValidationMessage For="@(() => RedactUser.PlaceOfWork)" />
                     </div><br />
-                </EditForm><br />
+                </EditForm><br /> 
                 <div class="ProfileButtons">
-                    <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button>
+                    <button class="btn_Redact" @onclick="Update"><h5>Сохранить изменения</h5></button><br /><br />
+                    <button class="btn_Add" @onclick="AddProduct"><h5>Добавить продукт</h5></button>
                 </div><br />
                 <button class="btn_Exit" @onclick="Exit"><h5>Выйти</h5></button>
             </div>
@@ -141,5 +142,10 @@
     {
         nav.NavigateTo("/");
         service.LogOut();
+    }
+
+    private void AddProduct()
+    {
+        nav.NavigateTo("/AddProduct");
     }
 }
