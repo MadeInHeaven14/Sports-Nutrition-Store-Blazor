@@ -113,8 +113,9 @@ a, .btn-link {
     background-color: #D86F6F;
 }
 
-.Catalog:hover{
-    filter:brightness(70%);
+.Catalog:hover {
+    filter: brightness(70%);
+    cursor: pointer;
 }
 
 .CatalogLogo {
