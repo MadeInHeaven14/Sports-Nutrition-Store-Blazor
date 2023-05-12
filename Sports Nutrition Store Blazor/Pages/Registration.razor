@@ -27,7 +27,7 @@
             <label>0</label>
             </span>*@
             <div class="Nav">
-                <span class="Catalog">
+                <span class="Catalog" @onclick="MoveToCatalog">
                     <span class="CatalogLogo">
                         <img src="/Images/1564497_basket_cart_food_grosseries_shop_icon.png" class="Basket" />
                         <label>Каталог</label>
@@ -148,5 +148,10 @@
     private void BalanceOrLogin()
     {
         nav.NavigateTo("/auth");
+    }
+
+    private void MoveToCatalog()
+    {
+        nav.NavigateTo("/Catalog");
     }
 }

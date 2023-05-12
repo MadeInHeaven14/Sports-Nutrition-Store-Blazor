@@ -494,3 +494,22 @@ a, .btn-link {
     filter: brightness(90%);
 }
 
+/*--------------------Страница каталога--------------------*/
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.CatalogImg{
+    width: 50px;
+    height:50px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-left: 45px;
+    text-align: center;
+}
+

@@ -22,6 +22,14 @@ namespace Sports_Nutrition_Store_Blazor.Data
             collection.InsertOne(NewProduct);
         }
 
+        public static List<Product> GetAllProduct()
+        {
+            var unit = new MongoClient();
+            var database = unit.GetDatabase("SportNutritionUsers");
+            var collection = database.GetCollection<Product>("Products");
+            var Products = collection.Find(FilterDefinition<Product>.Empty).ToList();
+            return Products;
+        }
         public static User FindWithEmail (string Email)
         {
             var client = new MongoClient();

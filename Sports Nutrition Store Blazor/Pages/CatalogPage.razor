@@ -1,5 +1,129 @@
-﻿<h3>CatalogPage</h3>
+﻿@page "/Catalog"
+@using Sports_Nutrition_Store_Blazor.Data;
+@inject NavigationManager nav;
+@inject UserService service;
+
+<body>
+    <div class="Main">
+        <div class="header">
+            <img src="/Images/Лого-transformed-transformed.png" class="Logo1" />
+            @*<input type="search" class="SearchBar" />*@
+            <span class="Balance">
+                <span class="BalanceText">
+                    <label>
+                        Баланс:
+                    </label>
+                    <label>
+                        @Balance
+                    </label>
+                    <label>RUB</label>
+                </span><br />
+                <a href="" class="PlusBalance" @onclick="BalanceOrLogin">
+                    <label>Пополнить баланс</label>
+                </a>
+            </span>
+            @*<span class="UserBasket" hidden="@false">
+            <label>Корзина:</label>
+            <label>0</label>
+            </span>*@
+            <div class="Nav">
+                <span class="Catalog">
+                    <span class="CatalogLogo">
+                        <img src="/Images/1564497_basket_cart_food_grosseries_shop_icon.png" class="Basket" />
+                        <label>Каталог</label>
+                    </span>
+                </span>
+                <span class="AboutCompany" @onclick="MoveToAboutCompany">
+                    <span class="AboutCompanyLogo">
+                        <img src="/Images/352432_info_icon.png" class="Basket" />
+                        <label>О компании</label>
+                    </span>
+                </span>
+                <span class="Login" @onclick="MoveToProfile">
+                    <span class="LoginLogo">
+                        <img src="/Images/1564534_customer_man_user_account_profile_icon.png" class="Basket" />
+                        <label>@User</label>
+                    </span>
+                </span>
+                <span class="UserBasket">
+                    <span class="UserBasketLogo">
+                        <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
+                        <label>Корзина: 0</label>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="CatalogForm">
+            <div class="image-container">
+                @foreach (var item in ProductList)
+                {
+                    <div class="card">
+                        <img src="/ProductImages/@item.Img" alt="Image" class="CatalogImg">
+                        <div>
+                            <p>@item.Name</p>
+                            <p>@item.Price руб.</p>
+                            <button>В корзину</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <footer class="Footer">
+            <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
+            <div class="SocNetwork">
+                <h5>Наши соц-сети:</h5><br />
+                <div class="Circles">
+                    <img src="/Images/unp6h58xr4fiscbc.png" class="Insta" />
+                    <img src="/Images/22842053.png" class="VK" />
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
 
 @code {
+    private string User = "Войти";
+    private string? Balance = "0.0";
+    private int BasketProductCount = 0;
+    List<Product> ProductList = new List<Product>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        if (service.Login != string.Empty)
+        {
+            User = service.Login;
+            Balance = service.Balance.ToString();
+            BasketProductCount = service.Basket.Count;
+        }
+        ProductList = MongoDB.GetAllProduct();
+    }
+
+    private void MoveToAboutCompany()
+    {
+        nav.NavigateTo("/");
+    }
+
+    private void MoveToProfile()
+    {
+        if (User != "Войти")
+        {
+            nav.NavigateTo("/ProCli");
+        }
+        else
+        {
+            nav.NavigateTo("/auth");
+        }
+    }
+
+    private void BalanceOrLogin()
+    {
+        if (User != "Войти")
+        {
+            
+        }
+        else
+        {
+            nav.NavigateTo("/auth");
+        }
+    }
 }
