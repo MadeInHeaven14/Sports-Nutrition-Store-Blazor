@@ -48,27 +48,26 @@
                 <span class="UserBasket">
                     <span class="UserBasketLogo">
                         <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
-                        <label>Корзина: 0</label>
+                        <label>Корзина: @BasketProductCount</label>
                     </span>
                 </span>
             </div>
-        </div>
+        </div><br />
         <div class="CatalogForm">
             <div class="image-container">
                 @foreach (var item in ProductList)
                 {
-                    PurchasedProduct = item;
                     <div class="card">
                         <img src="/ProductImages/@item.Img" alt="Image" class="CatalogImg">
                         <div>
-                            <p>@item.Name</p>
-                            <p>@item.Price руб.</p>
-                            <button @onclick="MoveProductToBasket">В корзину</button>
+                            <h4>@item.Name</h4>
+                            <h4>@item.Price руб.</h4>
+                            <button class="btn_AddToBasket" @onclick="() => MoveProductToBasket(item)">В корзину</button>
                         </div>
                     </div>
                 }
             </div>
-        </div>
+        </div><br />
         <footer class="Footer">
             <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
             <div class="SocNetwork">
@@ -84,9 +83,8 @@
 
 @code {
     private string User = "Войти";
-    private string? Balance = "0.0";
+    private double Balance = 0;
     private int BasketProductCount = 0;
-    private Product PurchasedProduct = new Product();
     List<Product> ProductList = new List<Product>();
 
     protected override async Task OnInitializedAsync()
@@ -94,7 +92,7 @@
         if (service.Login != string.Empty)
         {
             User = service.Login;
-            Balance = service.Balance.ToString();
+            Balance = service.Balance;
             BasketProductCount = service.Basket.Count;
         }
         ProductList = MongoDB.GetAllProduct();
@@ -129,15 +127,20 @@
         }
     }
 
-    private void MoveProductToBasket()
+    private void MoveProductToBasket(Product product)
     {
         if (User != "Войти")
         {
             User user = new User();
             user = MongoDB.FindWithEmail(service.Email);
-            user.Basket.Add(PurchasedProduct);
+            user.Basket.Add(product);
+            BasketProductCount = user.Basket.Count;
             MongoDB.ReplaceByEmail(user, service.Email);
             service.SignIn(user);
+        }
+        else
+        {
+            nav.NavigateTo("/auth");
         }
     }
 }
