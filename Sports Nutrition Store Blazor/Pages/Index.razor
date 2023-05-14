@@ -44,7 +44,7 @@
                         <label>@User</label>
                    </span>
                </span>
-                <span class="UserBasket" @onclick="BalanceOrLogin">
+                <span class="UserBasket" @onclick="MoveToBasket" hidden="@isBalanceHidden">
                    <span class="UserBasketLogo">
                        <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
                        <label>Корзина: @BasketProductCount</label>
@@ -119,6 +119,7 @@
     private int BasketProductCount = 0;
     private bool isBalanceHidden = false;
 
+
     private void Login()
     {
         if (User == "Войти")
@@ -160,10 +161,26 @@
         {
             nav.NavigateTo("/auth");
         }
+        else
+        {
+            
+        }
     }
 
     private void MoveToCatalog()
     {
         nav.NavigateTo("/Catalog");
+    }
+
+    private void MoveToBasket()
+    {
+        if (User != "Войти")
+        {
+            nav.NavigateTo("/Basket");
+        }
+        else
+        {
+            nav.NavigateTo("/auth");
+        }
     }
 }

@@ -456,7 +456,7 @@ a, .btn-link {
 /*--------------------Страница восстановления пароля--------------------*/
 
 .btn_RecoveryPassword {
-    margin-left: 195px;
+    margin-left: 175px;
     background-color: #D86F6F;
     width: 170px;
     height: 50px;
@@ -464,6 +464,18 @@ a, .btn-link {
 }
 
 .btn_RecoveryPassword:hover {
+    filter: brightness(90%);
+}
+
+.btn_RecoveryPasswordFinal {
+    margin-left: 200px;
+    background-color: #D86F6F;
+    width: 170px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.btn_RecoveryPasswordFinal:hover {
     filter: brightness(90%);
 }
 
@@ -523,4 +535,57 @@ a, .btn-link {
 .btn_AddToBasket:hover {
     filter: brightness(90%);
 }
+
+/*--------------------Страница корзины--------------------*/
+
+.BasketTable table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+.BasketTable th {
+    text-align: left;
+    padding: 10px;
+    background-color: #D86F6F;
+}
+
+.BasketTable td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.BasketTable tfoot td {
+    text-align: right;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.BasketTable tfoot button {
+    display: block;
+    margin: 10px auto;
+    background-color: #D86F6F;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.btn_RemoveProduct {
+    background-color: #D86F6F;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
 

@@ -49,7 +49,7 @@
                     </span>
                 </span>
                 <span class="UserBasket">
-                    <span class="UserBasketLogo">
+                    <span class="UserBasketLogo" @onclick="MoveToBasket">
                         <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
                         <label>Корзина: 0</label>
                     </span>
@@ -157,5 +157,17 @@
     private void MoveToCatalog()
     {
         nav.NavigateTo("/Catalog");
+    }
+
+    private void MoveToBasket()
+    {
+        if (User != "Войти")
+        {
+            nav.NavigateTo("/Basket");
+        }
+        else
+        {
+            nav.NavigateTo("/auth");
+        }
     }
 }
