@@ -1,4 +1,4 @@
-﻿@page "/Catalog"
+﻿@page "/Gratitude"
 @using Sports_Nutrition_Store_Blazor.Data;
 @inject NavigationManager nav;
 @inject UserService service;
@@ -53,20 +53,12 @@
                 </span>
             </div>
         </div><br />
-        <div class="CatalogForm">
-            <div class="image-container">
-                @foreach (var item in ProductList)
-                {
-                    <div class="card">
-                        <img src="/ProductImages/@item.Img" alt="Image" class="CatalogImg">
-                        <div>
-                            <h5>@item.Name</h5>
-                            <h5>@item.Price руб.</h5>
-                            <button class="btn_AddToBasket" @onclick="() => MoveProductToBasket(item)" hidden="@isHidden">В корзину</button>
-                        </div>
-                    </div>
-                }
-            </div>
+        <div class="thankyou-container">
+            <h3>Благодарим вас за покупку!</h3>
+
+            <p>Мы ценим вашу поддержку и надеемся увидеть вас снова.</p>
+
+            <button class="btn_GoToHome" @onclick="MoveToHome">На главную страницу</button>
         </div><br />
         <footer class="Footer">
             <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
@@ -146,7 +138,7 @@
             User user = new User();
             user = MongoDB.FindWithEmail(service.Email);
             user.Basket.Add(product);
-            BasketProductCount = user.Basket.Count; 
+            BasketProductCount = user.Basket.Count;
             MongoDB.ReplaceByEmail(user, service.Email);
             service.SignIn(user);
         }
@@ -166,5 +158,10 @@
         {
             nav.NavigateTo("/auth");
         }
+    }
+
+    private void MoveToHome()
+    {
+        nav.NavigateTo("/");
     }
 }

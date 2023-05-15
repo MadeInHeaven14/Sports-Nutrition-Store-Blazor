@@ -48,7 +48,7 @@
                         <label>@User</label>
                     </span>
                 </span>
-                <span class="UserBasket">
+                <span class="UserBasket" hidden="@true">
                     <span class="UserBasketLogo" @onclick="MoveToBasket">
                         <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
                         <label>Корзина: 0</label>
@@ -80,8 +80,9 @@
                         <BlazorInputFile.InputFile OnChange="HandleFileSelected" />
                         @*<ValidationMessage For="@(() => NewProduct.Name)" />*@
                     </div><br />
+                    <h2 class="Danger">@Message</h2>
                 </EditForm>
-                @if (file != null)
+                @if (file != null && NewProduct.Name != null && NewProduct.Price != 0)
                 {
                     <button class="btn_ProductAdd" @onclick="AddProduct">Добавить товар</button>
 
@@ -107,6 +108,8 @@
     IFileListEntry? file;
     private string? User = "Войти";
     private Product NewProduct = new Product();
+    private string Message = string.Empty;
+    private List<string> items = new List<string> { "Протеин", "Креатин", "Напитки", "Батончики и другие закуски" };
 
     protected override async Task OnInitializedAsync()
     {
@@ -116,6 +119,11 @@
     private void MoveToAboutCompany()
     {
         nav.NavigateTo("/");
+    }
+
+    private void MoveToProfile()
+    {
+
     }
 
     private void Login()
@@ -142,6 +150,7 @@
     private void AddProduct()
     {
         MongoDB.AddProductToDB(NewProduct);
+        nav.NavigateTo("/ProAdm");
     }
 
     async Task HandleFileSelected(IFileListEntry[] files)

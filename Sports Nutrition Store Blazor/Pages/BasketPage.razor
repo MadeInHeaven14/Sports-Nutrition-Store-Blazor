@@ -18,7 +18,7 @@
                     </label>
                     <label>RUB</label>
                 </span><br />
-                <a href="" class="PlusBalance" @onclick="BalanceOrLogin">
+                <a href="/BalanceAdd" class="PlusBalance" @onclick="BalanceOrLogin">
                     <label>Пополнить баланс</label>
                 </a>
             </span>
@@ -54,6 +54,7 @@
             </div>
         </div><br />
         <div class="BasketTable">
+            <h1>Корзина</h1>
             @if (service.Basket.Count != 0)
             {
                  <table>
@@ -69,24 +70,24 @@
                         {
                             <tr>
                                 <td>@item.Name</td>
-                                <td>@item.Price</td>
+                                <td>@item.Price руб.</td>
                                 <td><button class="btn_RemoveProduct" @onclick="(() => RemoveItem(item))">Удалить</button></td>
                             </tr>
                         }
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td>Итого: @sum</td>
-                            <td><button>Оформить покупку</button></td>
+                            <td>Итого: @sum руб.</td>
+                            <td><button class="btn_MakePurchase" @onclick="MoveToBuyPage">Оформить покупку</button></td>
                         </tr>
                     </tfoot>
                 </table>
             }
             else
             {
-                
+                <h2>Кажется, вы не добавляли товары в корзину...</h2>
             }
-        </div>
+        </div><br />
         <footer class="Footer">
             <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
             <div class="SocNetwork">
@@ -190,6 +191,11 @@
         MongoDB.ReplaceByEmail(user, service.Email);
         service.SignIn(user);
         sum -= product.Price;
+    }
+
+    private void MoveToBuyPage()
+    {
+        nav.NavigateTo("/Buy");
     }
 }
 

@@ -17,7 +17,7 @@
                    </label>
                    <label>RUB</label>
                </span><br />
-                <a href="" class="PlusBalance" @onclick="BalanceOrLogin">
+                <a href="/BalanceAdd" class="PlusBalance" @onclick="BalanceOrLogin">
                     <label>Пополнить баланс</label>
                 </a>
            </span>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn_MoveToCatalog">
+            <button class="btn_MoveToCatalog" @onclick="MoveToCatalog">
                 <h4>Перейти в каталог</h4>
              </button>
         </div>

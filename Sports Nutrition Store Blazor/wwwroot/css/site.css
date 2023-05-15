@@ -195,7 +195,7 @@ a, .btn-link {
     width: 100%;
     background-color: #D86F6F;
     display: inline-block;
-    border-radius: 20px;
+    border-radius: 4px;
 }
 
 .PlusGroup img {
@@ -228,7 +228,7 @@ a, .btn-link {
 .Products img {
     width:546px;
     height:372px;
-    border-radius:35px;
+    border-radius: 4px;
 }
 
 .Products img:hover {
@@ -284,7 +284,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width:300px;
     height:100px;
-    border-radius:30px;
+    border-radius: 4px;
     margin-left:560px;
     margin-top: 120px;
     margin-bottom: 25px;
@@ -352,7 +352,7 @@ a, .btn-link {
 .AuthForm {
     width: 40%;
     background-color: #D86F6F;
-    border-radius: 30px;
+    border-radius: 4px;
     margin-left: 450px;
 }
 
@@ -378,7 +378,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 170px;
     height: 40px;
-    border-radius: 15px;
+    border-radius: 4px;
 }
 
 .SignIn:hover {
@@ -421,7 +421,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 150px;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 4px;
     margin-left:90px;
 }
 
@@ -433,7 +433,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 150px;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 4px;
     margin-left: 90px;
 }
 
@@ -445,7 +445,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 150px;
     height: 60px;
-    border-radius: 30px;
+    border-radius: 4px;
     margin-left: 90px;
 }
 
@@ -460,7 +460,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 170px;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 4px;
 }
 
 .btn_RecoveryPassword:hover {
@@ -472,7 +472,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 170px;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 4px;
 }
 
 .btn_RecoveryPasswordFinal:hover {
@@ -499,7 +499,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 170px;
     height: 40px;
-    border-radius: 15px;
+    border-radius: 4px;
 }
 
 .btn_ProductAdd:hover {
@@ -507,7 +507,6 @@ a, .btn-link {
 }
 
 /*--------------------Страница каталога--------------------*/
-
 .image-container {
     display: flex;
     flex-wrap: wrap;
@@ -515,7 +514,7 @@ a, .btn-link {
 
 .CatalogImg{
     width: 405px;
-    height:375px;
+    height: 500px;
 }
 
 .card {
@@ -529,7 +528,7 @@ a, .btn-link {
     background-color: #D86F6F;
     width: 150px;
     height: 40px;
-    border-radius: 15px;
+    border-radius: 4px;
 }
 
 .btn_AddToBasket:hover {
@@ -579,6 +578,10 @@ a, .btn-link {
     font-family: Arial, sans-serif;
 }
 
+.BasketTable button:hover {
+    filter: brightness(90%);
+}
+
 .btn_RemoveProduct {
     background-color: #D86F6F;
     border: none;
@@ -586,6 +589,203 @@ a, .btn-link {
     font-size: 14px;
     cursor: pointer;
     border-radius: 4px;
+}
+
+/*--------------------Страница покупки--------------------*/
+
+.BuyForm form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.BuyForm form div {
+    margin-bottom: 20px;
+}
+
+.BuyForm label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.BuyForm input[type="text"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.BuyForm p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.BuyForm input[type="radio"] {
+    margin-right: 5px;
+}
+
+.BuyForm button[type="submit"] {
+    background-color: #D86F6F;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.BuyForm button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.Card fieldset {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Card div {
+    margin-bottom: 20px;
+}
+
+.Card label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.Card input[type="text"],
+input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.Card input[type="text"]#card-number {
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 2px;
+}
+
+.Card input[type="text"]#expiry-date,
+input[type="text"]#cvv {
+    width: 60px;
+}
+
+.btn_FinishBuy {
+    background-color: #D86F6F;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn_FinishBuy:hover {
+    filter: brightness(90%);
+}
+
+.input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.DangerPurchase {
+    color: red;
+    font-size: 24px;
+}
+
+/*--------------------Страница благодарности--------------------*/
+
+.thankyou-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.thankyou-container h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.thankyou-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn_GoToHome {
+    background-color: #D86F6F;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/*--------------------Страница пополнения баланса--------------------*/
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    text-align: center;
+    font-size: 24px;
+    color: #D86F6F;
+    margin-bottom: 20px;
+}
+
+.input-label {
+    color: #333333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #F2F2F2;
+    color: #333333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(216, 111, 111, 0.5);
+    background-color: #FFFFFF;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #D86F6F;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #B55757;
 }
 
 

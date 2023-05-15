@@ -1,4 +1,4 @@
-﻿@page "/Catalog"
+﻿@page "/BalanceAdd"
 @using Sports_Nutrition_Store_Blazor.Data;
 @inject NavigationManager nav;
 @inject UserService service;
@@ -18,7 +18,7 @@
                     </label>
                     <label>RUB</label>
                 </span><br />
-                <a href="/BalanceAdd" class="PlusBalance" @onclick="BalanceOrLogin">
+                <a href="" class="PlusBalance" @onclick="BalanceOrLogin">
                     <label>Пополнить баланс</label>
                 </a>
             </span>
@@ -27,7 +27,7 @@
             <label>0</label>
             </span>*@
             <div class="Nav">
-                <span class="Catalog">
+                <span class="Catalog" @onclick="MoveToCatalog">
                     <span class="CatalogLogo">
                         <img src="/Images/1564497_basket_cart_food_grosseries_shop_icon.png" class="Basket" />
                         <label>Каталог</label>
@@ -45,7 +45,7 @@
                         <label>@User</label>
                     </span>
                 </span>
-                <span class="UserBasket" @onclick="MoveToBasket" hidden="@isHidden">
+                <span class="UserBasket" @onclick="MoveToBasket">
                     <span class="UserBasketLogo">
                         <img src="/Images/3669232_basket_shopping_ic_icon.png" class="Basket" />
                         <label>Корзина: @BasketProductCount</label>
@@ -53,20 +53,27 @@
                 </span>
             </div>
         </div><br />
-        <div class="CatalogForm">
-            <div class="image-container">
-                @foreach (var item in ProductList)
-                {
-                    <div class="card">
-                        <img src="/ProductImages/@item.Img" alt="Image" class="CatalogImg">
-                        <div>
-                            <h5>@item.Name</h5>
-                            <h5>@item.Price руб.</h5>
-                            <button class="btn_AddToBasket" @onclick="() => MoveProductToBasket(item)" hidden="@isHidden">В корзину</button>
-                        </div>
-                    </div>
-                }
-            </div>
+        <div class="container">
+            <h1 class="heading">Пополнение баланса</h1>
+            <form>
+                <div class="input-label">Сумма пополнения:</div>
+                <input type="number" @bind-value="sum" class="input-field" placeholder="Введите сумму">
+
+                <div class="input-label">Номер карты:</div>
+                <input type="text" @bind-value="NumberCard" class="input-field" placeholder="Введите номер карты">
+
+                <div class="input-label">Имя на карте:</div>
+                <input type="text" @bind-value="Name" class="input-field" placeholder="Введите имя на карте">
+
+                <div class="input-label">Срок действия:</div>
+                <input type="text" @bind-value="Date" class="input-field" placeholder="Введите срок действия">
+
+                <div class="input-label">CVC:</div>
+                <input type="text" @bind-value="cvc" class="input-field" placeholder="Введите CVV">
+
+            </form>
+            <button @onclick="AddBalance" class="submit-button">Пополнить баланс</button>
+            <h2 class="DangerPurchase">@Message</h2>
         </div><br />
         <footer class="Footer">
             <img src="/Images/Лого-transformed-transformed.png" class="FooterLogo" />
@@ -84,9 +91,15 @@
 @code {
     private string User = "Войти";
     private double Balance = 0;
-    private int BasketProductCount = 0;
     private bool isHidden = false;
+    private int BasketProductCount = 0;
     List<Product> ProductList = new List<Product>();
+    private float sum = 0;
+    private string NumberCard = string.Empty;
+    private string Name = string.Empty;
+    private string Date = string.Empty;
+    private string cvc = string.Empty;
+    private string Message = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -127,28 +140,16 @@
         }
     }
 
+    private void MoveToCatalog()
+    {
+        nav.NavigateTo("/Catalog");
+    }
+
     private void BalanceOrLogin()
     {
         if (User != "Войти")
         {
 
-        }
-        else
-        {
-            nav.NavigateTo("/auth");
-        }
-    }
-
-    private void MoveProductToBasket(Product product)
-    {
-        if (User != "Войти")
-        {
-            User user = new User();
-            user = MongoDB.FindWithEmail(service.Email);
-            user.Basket.Add(product);
-            BasketProductCount = user.Basket.Count; 
-            MongoDB.ReplaceByEmail(user, service.Email);
-            service.SignIn(user);
         }
         else
         {
@@ -165,6 +166,24 @@
         else
         {
             nav.NavigateTo("/auth");
+        }
+    }
+
+    private void AddBalance()
+    {
+        if (sum != 0 && NumberCard != null && Name != null && Date != null && cvc != null)
+        {
+            User user = new User();
+            user = MongoDB.FindWithEmail(service.Email);
+            user.Balance += sum;
+            Balance = user.Balance;
+            MongoDB.ReplaceByEmail(user, service.Email);
+            service.SignIn(user);
+            nav.NavigateTo("/");
+        }
+        else
+        {
+            Message = "Заполните все данные!";
         }
     }
 }
